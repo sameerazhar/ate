@@ -1,2 +1,0 @@
-# ate
-Final sem project
