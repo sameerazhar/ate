@@ -1,0 +1,19 @@
+.dropdown-menu>li>a:hover,
+.dropdown-menu>li.active>a
+{
+	filter: none;
+	color: white;
+	background-color: #3366CC;
+	background-image: none;
+}
+
+.navbar-nav>li:hover
+{
+	background-color: black;
+}
+
+.nav-pills>li.active>a:hover, .nav-pills>li>a:hover
+{
+	/* background-color: #0033FF; color: white;*/
+	background-color: #3366FF; color: white;
+}

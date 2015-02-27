@@ -1,0 +1,25 @@
+#include<stdio.h>
+
+int main()
+{
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	printf("OK");
+	return 0;
+}

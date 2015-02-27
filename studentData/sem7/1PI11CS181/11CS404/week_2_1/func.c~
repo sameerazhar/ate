@@ -1,0 +1,7 @@
+#include<stdio.h>
+
+int func(int n)
+{
+	printf("Hello World!!\n");
+	printf("%d\n", n);
+}
