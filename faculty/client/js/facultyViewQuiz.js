@@ -28,7 +28,7 @@ function getQuizQuestion(quiz_id)
 	xhr_getQuiz = getXmlHttpObject();
 	xhr_getQuiz.onreadystatechange = getQuizQuestion_response;
 	var quiz = encodeNameAndValue("quiz_id", quiz_id);
-	xhr_getQuiz.open("GET", "/ate/faculty/server/facultyViewQuiz.php?" + quiz, true);
+	xhr_getQuiz.open("GET", "../server/facultyViewQuiz.php?" + quiz, true);
 	xhr_getQuiz.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr_getQuiz.send();
 }

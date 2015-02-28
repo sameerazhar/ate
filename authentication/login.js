@@ -98,7 +98,7 @@
 				var encodedPass = encodeNameAndValue("user_pwd", user_pwd);
 				var encodedType = encodeNameAndValue("user_type", user_type);	
 				xhr=getXmlHttpObject();
-				xhr.open("POST","/ate/authentication/login.php",true);
+				xhr.open("POST","./authentication/login.php",true);
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				xhr.onreadystatechange=login_result;      
 				xhr.send(encodedName + "&" + encodedPass + "&" + encodedType);	
@@ -114,15 +114,15 @@
 						{
 							if(user_type === "admin")
 							{
-								location.href = "/ate/admin/client/admin.php";
+								location.href = "./admin/client/admin.php";
 							}
 							else if(user_type === "student" )
 							{
-								location.href = "/ate/student/client/student.php";
+								location.href = "./student/client/student.php";
 							}
 							else if(user_type === "faculty")
 							{
-								location.href = "/ate/faculty/client/faculty.php";
+								location.href = "./faculty/client/faculty.php";
 							}
 						}
 						else

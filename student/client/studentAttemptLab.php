@@ -2,7 +2,7 @@
 	session_start();
 	if( !isset($_SESSION["username"]) || !isset($_SESSION["usertype"]) || $_SESSION["usertype"]!= "student" )
 	{
-		header("Location: /ate/index.php");
+		header("Location: ../../index.php");
 	}
 	extract($_GET);
 ?>
@@ -10,16 +10,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="/ate/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/ate/bootstrap/css/mynav.css">
+		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/mynav.css">
 		<style type="text/css">
 			textarea
 			{
 				font-size: 20px;
 			}
 		</style>
-		<script language="Javascript" type="text/javascript" src="/ate/edit_area/edit_area_full.js"></script>
-		<script type="text/javascript" src = "/ate/student/client/js/studentAttemptLab.js"></script>
+		<script language="Javascript" type="text/javascript" src="../../edit_area/edit_area_full.js"></script>
+		<script type="text/javascript" src = "./js/studentAttemptLab.js"></script>
 	</head>
 	<body style="background-color:#F0F0F0;">
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -31,7 +31,6 @@
 			            <span class="icon-bar"></span>
 			            <span class="icon-bar"></span>
 		        	</button>
-		        	
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		        	<ul class="nav navbar-nav  navbar-right">
@@ -39,9 +38,9 @@
 						<li class = "dropdown active">
 						<a href="#" class = "dropdown-toggle" id = "username" data-toggle = "dropdown" style="color:white">USERNAME <b class = "caret"></b></a>
 						<ul class = "dropdown-menu">
-							<li><a href="#">Change Password</a></li>
-							<li><a href="#">Change Username</a></li>
-							<li><a href="/ate/authentication/logout.php">Log Out</a></li>
+							<li><a href="./studentChangePassword.php">Change Password</a></li>
+							<li><a href="./studentRegisterCourses.php">Register Courses</a></li>
+							<li><a href="../../authentication/logout.php">Log Out</a></li>
 						</ul>
 						</li>
 		          	</ul>
@@ -244,15 +243,13 @@
 			</div>
 		</div>
 		
-		<script type="text/javascript" src = "/ate/bootstrap/js/jquery.min.js"></script>
-		<script type="text/javascript" src = "/ate/bootstrap/js/bootstrap.min.js"></script>
-
+		<script type="text/javascript" src = "../../bootstrap/js/jquery.min.js"></script>
+		<script type="text/javascript" src = "../../bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			window.onload = function ()
 			{
 			    var username = document.getElementById("username");
 			    username.innerHTML = <?php echo  json_encode($_SESSION["username"])  ?> + "&nbsp;<b class = \"caret\"></b>";
-			    
 				fetch_files();
 			}
 		</script>

@@ -10,5 +10,5 @@ function attempt_quiz(course, quiz_id)
 {
 	var encodedQuiz_id = encodeNameAndValue("quiz_id", quiz_id);
 	var encodedCourse = encodeNameAndValue("course", course);
-	window.location = "/ate/student/client/studentAttemptQuiz.php?" + encodedCourse + "&" + encodedQuiz_id;
+	window.location = "./studentAttemptQuiz.php?" + encodedCourse + "&" + encodedQuiz_id;
 }

@@ -3,7 +3,7 @@
 	require_once '../sql_connect.php';
 	if( !isset($_SESSION["username"]) || !isset($_SESSION["usertype"]) )
 	{
-		header("Location: /ate/ate.php");
+		header("Location: ../ate.php");
 	}
 
 	// Prevent SQL Injection.

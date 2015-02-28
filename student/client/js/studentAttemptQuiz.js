@@ -45,7 +45,7 @@ function submit_quiz()
 	var time=parseInt(timer[0]) * 60 + parseInt(timer[1]);
 	var encodedTime = encodeNameAndValue("time", time);
 	xhr_submit_quiz = getXmlHttpObject();
-	xhr_submit_quiz.open("POST","/ate/student/server/evaluateQuiz.php",true);
+	xhr_submit_quiz.open("POST","../server/studentEvaluateQuiz.php",true);
 	xhr_submit_quiz.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr_submit_quiz.onreadystatechange = submit_quiz_response;      
 	xhr_submit_quiz.send(encodedAnswers + "&" + encodedQuiz_id + "&" + encodedTime );
@@ -57,8 +57,7 @@ function submit_quiz_response()
 	{
 		if(xhr_submit_quiz.status == 200 || xhr_submit_quiz.status == 304)
 		{
-			//alert(xhr_submit_quiz.responseText);
-			window.location= "/ate/student/client/studentQuiz.php?course=" + course;
+			window.location = "./studentQuizSubmitted.php?course=" + course;
 		}
 		else
 		{
@@ -77,7 +76,7 @@ function startTimer()
 		// Check whether Web Worker has been created. If not, create a new Web Worker based on
 		if( w == null)
 		{
-			w = new Worker("/ate/student/client/js/timerWorker.js");
+			w = new Worker("./js/timerWorker.js");
 		}
 		// Update timer div with output from Web Worker
 		w.onmessage = function (event)
@@ -113,7 +112,7 @@ function update_quiz()
 	var encodedQuiz_id = encodeNameAndValue("quiz_id", quiz_id);
 	var encodedTime = encodeNameAndValue("time", time);
 	xhr_update_quiz = getXmlHttpObject();
-	xhr_update_quiz.open("POST", "/ate/student/server/studentUpdateQuiz.php", true);
+	xhr_update_quiz.open("POST", "../server/studentUpdateQuiz.php", true);
 	xhr_update_quiz.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr_update_quiz.onreadystatechange = update_quiz_response;
 	xhr_update_quiz.send(encodedAnswers + "&" + encodedQuiz_id + "&" + encodedTime);

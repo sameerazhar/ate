@@ -5,7 +5,7 @@
 	session_start();
 	if( !isset($_SESSION["username"]) || !isset($_SESSION["usertype"]) || $_SESSION["usertype"]!= "faculty" )
 	{
-		header("Location: /ate/index.php");
+		header("Location: ../../index.php");
 	}
 	//  Read your Excel workbook
 	try 

@@ -35,7 +35,7 @@ function update_password()
 		var encodedOldPasswod = encodeNameAndValue("old_pwd", old_pwd);
 		var encodedNewPassword = encodeNameAndValue("new_pwd", new_pwd);	
 		xhr=getXmlHttpObject();
-		xhr.open("POST","/ate/authentication/changePassword.php",true);
+		xhr.open("POST","../../authentication/changePassword.php",true);
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhr.onreadystatechange=update_result;      
 		xhr.send(encodedOldPasswod + "&" + encodedNewPassword );
@@ -47,7 +47,15 @@ function update_result()
 	{
 		if(xhr.status == 200 || xhr.status == 304)
 		{
-			error_msg.innerHTML=xhr.responseText;
+			if( xhr.responseText == "Password changed successfully.")
+			{
+				error_msg.style.color = "green";
+			}
+			else
+			{
+				error_msg.style.color = "red";
+			}
+			error_msg.innerHTML = xhr.responseText;
 		}
 		else
 		{
@@ -57,5 +65,5 @@ function update_result()
 }
 function cancel()
 {
-	location="../index.php";
+	window.location="../../index.php";
 }

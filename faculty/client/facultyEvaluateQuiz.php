@@ -17,8 +17,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="/ate/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/ate/bootstrap/css/mynav.css">
+		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/mynav.css">
 	</head>
 	<body style="background-color:#F0F0F0;">
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -30,22 +30,18 @@
 			            <span class="icon-bar"></span>
 			            <span class="icon-bar"></span>
 		        	</button>
-		        	<div class="navbar-brand" style="color:white"></div>
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		        	<ul class="nav navbar-nav  navbar-right">
-		        		
-		            	<li><a href="/ate/faculty/client/faculty.php" style="color:white"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;Home</a></li>
-		            	
+		        		<li><a href="./faculty.php" style="color:white"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;Home</a></li>
 						<li class = "dropdown">
 						<a href="#" class = "dropdown-toggle" id = "username" data-toggle = "dropdown" style="color:white">USERNAME <b class = "caret"></b></a>
 						<ul class = "dropdown-menu">
-							<li><a href="#">Change Password</a></li>
 							<li><a href="#">Change Username</a></li>
-							<li><a href="/ate/authentication/logout.php">Log Out</a></li>
+							<li><a href="#">Change Password</a></li>
+							<li><a href="../../authentication/logout.php">Log Out</a></li>
 						</ul>
 						</li>
-						
 		          	</ul>
 		        </div>
 	    	</div>
@@ -65,10 +61,10 @@
 							<div class="row">
 								<div class="col-sm-3">
 									<ul class="nav nav-pills nav-stacked">
-										<li><a href=<?php echo "/ate/faculty/client/facultyUploadLab.php?course=" . $course_code; ?> >Lab Assignments</a></li>
-										<li><a href="/ate/faculty/client/facultyCourseRegAssign.php">Assignments</a></li>
-										<li><a href="/ate/faculty/client/facultyCourseExam.php">Exams</a></li>
-										<li class="active"><a href=<?php echo "/ate/faculty/client/facultyQuizzes.php?course=" . $course_code; ?> >Quiz</a></li>
+										<li><a href=<?php echo "./facultyUploadLab.php?course=" . $course_code; ?> >Lab Assignments</a></li>
+										<li><a href="./facultyCourseRegAssign.php">Assignments</a></li>
+										<li><a href="./facultyCourseExam.php">Exams</a></li>
+										<li class="active"><a href=<?php echo "./facultyQuizzes.php?course=" . $course_code; ?> >Quiz</a></li>
 									</ul>
 								</div>
 								<div class="col-sm-9">
@@ -77,8 +73,8 @@
 											<div class="row">
 												<div class="col-sm-12">
 													<ul class="nav nav-tabs">
-														<li class="active"><a href=<?php echo "/ate/faculty/client/facultyQuizzes.php?course=" . $course_code; ?> >Quizzes</a></li>
-														<li><a href=<?php echo "/ate/faculty/client/facultyUploadQuiz.php?course=" . $course_code; ?> >Create new Quiz</a></li>	
+														<li class="active"><a href=<?php echo "./facultyQuizzes.php?course=" . $course_code; ?> >Quizzes</a></li>
+														<li><a href=<?php echo "./facultyUploadQuiz.php?course=" . $course_code; ?> >Create new Quiz</a></li>	
 													</ul>
 												</div>
 											</div>
@@ -95,6 +91,7 @@
 														else
 														{
 															$row = mysql_fetch_assoc($result, MYSQL_ASSOC);
+															$quiz_name = $row["quiz_name"];
 															echo "<h3 style=\"padding-left:5%;\">" . $row["quiz_name"] . " - Results</h3>";
 														}
 													?>
@@ -103,10 +100,19 @@
 											<hr>
 											<div class="row">
 												<div class="col-sm-3 col-xs-6 col-sm-offset-7">
-													<button class="btn btn-default pull-right">Download Results</button>
+													<!--<button class="btn btn-default pull-right">Download Results</button>-->
+													<form action="../server/facultyDownloadResultQuiz.php" method="post" name="export_excel">
+														<div class="control-group">
+															<div class="controls">
+																<input type = "text" value = <?php echo "\"$quiz_id;\"" ?> name = "quiz_id" style="display:none;"/>
+																<input type = "text" value = <?php echo "\"$quiz_name.xls;\"" ?> name = "quiz_name" style="display:none;"/>
+																<button type="submit" id="export" name="export" class="btn btn-default pull-right button-loading" data-loading-text="Loading...">Download Result</button>
+															</div>
+														</div>
+													</form>
 												</div>
 												<div class="col-sm-2 col-xs-6">
-													<a href = <?php echo "/ate/faculty/client/facultyViewQuiz.php?course=" . $course_code . "&quiz=" . $quiz_id; ?> class="btn btn-default pull-right">View Questions</a>
+													<a href = <?php echo "./facultyViewQuiz.php?course=" . $course_code . "&quiz=" . $quiz_id; ?> class="btn btn-default pull-right">View Questions</a>
 												</div>
 											</div>
 											<br>
@@ -156,9 +162,9 @@
 			</div>
 		</div>
 
-		<script type="text/javascript" src = "/ate/bootstrap/js/jquery.min.js"></script>
-		<script type="text/javascript" src = "/ate/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src = "/ate/faculty/client/js/facultyEvaluateQuiz.js"></script>
+		<script type="text/javascript" src = "../../bootstrap/js/jquery.min.js"></script>
+		<script type="text/javascript" src = "../../bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src = "./js/facultyEvaluateQuiz.js"></script>
 		<script type="text/javascript">
 			window.onload = function ()
 			{

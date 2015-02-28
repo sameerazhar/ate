@@ -10,5 +10,5 @@
 		unset($_SESSION['usertype']);
 	}
 	session_destroy();
-	header("Location: /ate/index.php");
+	header("Location: ../index.php");
 ?>

@@ -26,7 +26,7 @@ function evaluate_quiz(quiz_id, usn)
 	var encodedQuiz_id = encodeNameAndValue("quiz_id", quiz_id);
 	var encodedUsn = encodeNameAndValue("usn", usn);
 	xhr_eval_quiz = getXmlHttpObject();
-	xhr_eval_quiz.open("POST","/ate/faculty/server/facultyEvaluateQuiz.php",true);
+	xhr_eval_quiz.open("POST","../server/facultyEvaluateQuiz.php",true);
 	xhr_eval_quiz.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr_eval_quiz.onreadystatechange = evaluate_quiz_response;      
 	xhr_eval_quiz.send( encodedQuiz_id + "&" + encodedUsn );

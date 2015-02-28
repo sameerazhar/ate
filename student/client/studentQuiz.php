@@ -2,7 +2,7 @@
 	session_start();
 	if( !isset($_SESSION["username"]) || !isset($_SESSION["usertype"]) || $_SESSION["usertype"]!= "student" )
 	{
-		header("Location: /ate/index.php");
+		header("Location: ../../index.php");
 	}
 	extract($_GET);
 	require_once "../../sql_connect.php";
@@ -16,8 +16,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="/ate/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/ate/bootstrap/css/mynav.css">
+		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/mynav.css">
 	</head>
 	<body style="background-color:#F0F0F0;">
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -33,13 +33,13 @@
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		        	<ul class="nav navbar-nav  navbar-right">
-		            	<li><a href="#" style="color:white">Home</a></li>
+		            	<li><a href="./student.php" style="color:white"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;Home</a></li>
 						<li class = "dropdown active">
 						<a href="#" class = "dropdown-toggle" id = "username" data-toggle = "dropdown" style="color:white">USERNAME <b class = "caret"></b></a>
 						<ul class = "dropdown-menu">
-							<li><a href="#">Change Password</a></li>
-							<li><a href="#">Change Username</a></li>
-							<li><a href="/ate/authentication/logout.php">Log Out</a></li>
+							<li><a href="./studentChangePassword.php">Change Password</a></li>
+							<li><a href="./studentRegisterCourses.php">Register Courses</a></li>
+							<li><a href="../../authentication/logout.php">Log Out</a></li>
 						</ul>
 						</li>
 		          	</ul>
@@ -75,10 +75,10 @@
 							<br>
 							<div>
 								<ul class="nav nav-tabs">
-									<li><a href=<?php echo "/ate/student/client/studentLab.php?course=" . $course_code?> >Lab Assignments</a></li>
+									<li><a href=<?php echo "./studentLab.php?course=" . $course_code?> >Lab Assignments</a></li>
 									<li><a href="#">Assignments</a></li>
 									<li><a href="#">Exams</a></li>
-									<li class="active"><a href=<?php echo "\"/ate/student/client/studentQuiz.php?course=" . $course_code . "\"";?> >Quiz</a></li>
+									<li class="active"><a href=<?php echo "\"./studentQuiz.php?course=" . $course_code . "\"";?> >Quiz</a></li>
 									
 								</ul>
 							</div>
@@ -118,9 +118,9 @@
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript" src = "/ate/bootstrap/js/jquery.min.js"></script>
-		<script type="text/javascript" src = "/ate/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src = "/ate/student/client/js/studentQuiz.js"></script>
+		<script type="text/javascript" src = "../../bootstrap/js/jquery.min.js"></script>
+		<script type="text/javascript" src = "../../bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src = "./js/studentQuiz.js"></script>
 		<script type="text/javascript">
 			window.onload = function ()
 			{

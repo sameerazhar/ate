@@ -11,9 +11,10 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/mynav.css">
+		<script type="text/javascript" src = "./js/studentChangePassword.js"></script>
 	</head>
 	<body style="background-color:#F0F0F0;">
-		<nav class="navbar navbar-inverse navbar-fixed-top">
+		<nav class="navbar navbar-inverse navbar-static-top">
 	    	<div class="container">
 		        <div class="navbar-header">
 		        	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -26,6 +27,7 @@
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		        	<ul class="nav navbar-nav  navbar-right">
+		        		<li><a href="./student.php" style="color:white"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;Home</a></li>
 						<li class = "dropdown active">
 						<a href="#" class = "dropdown-toggle" id = "username" data-toggle = "dropdown" style="color:white">USERNAME <b class = "caret"></b></a>
 						<ul class = "dropdown-menu">
@@ -39,40 +41,51 @@
 	    	</div>
     	</nav>
 		
-		<br>
 
-
-		<div class="container" style="padding-top:4%">
+		<div class = "container">
 			<div class = "row">
 				<div class = "col-sm-12">
 					<div class="panel panel-default">
 						<div class = "panel-body">
 							<div class = "page-header">
-								<h2 style = "padding-left:5%">Programming Laboratories</h2>
+								<h2 style = "padding-left:5%">Change Password</h2>
 							</div>
 							<br>
-							<div class = "list-group">
-								<?php
-									require_once "../../sql_connect.php";
-									$query = "SELECT * FROM course_reg WHERE usn='" . $_SESSION["username"] . "'";
-									$result = mysql_query($query);
-									$num = mysql_num_rows($result);
-									if( $num == 0 )
-									{
-										echo "<h3 style = \"color:red;padding-left:3%\">No Courses Registered</h3>";
-									}
-									else
-									{
-										for( $var = 0; $var < $num; $var++ )
-										{
-											$row = mysql_fetch_assoc($result,MYSQL_ASSOC);
-											$query = "SELECT course_code, course_name FROM course WHERE course_code='" . $row["course_code"] . "'";
-											$res = mysql_query($query);
-											$row = mysql_fetch_assoc($res,MYSQL_ASSOC);
-											echo "<a href=\"./studentLab.php?course=" . $row["course_code"] . "\" id=\"sem\"  class=\"list-group-item\">". $row["course_code"] . " - " . $row["course_name"] . "</a>";
-										}
-									}
-								?>
+							<div>
+								<div class="row">
+									<div class="col-sm-2 col-sm-offset-1" style="align:center"><label style="padding-top:4%;">Current Password</label></div>
+									<div class="col-sm-6">
+										<input type="password" autofocus placeholder = "Current Password" id = "old_password" class="form-control"/>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-2 col-sm-offset-1" style="align:center"><label style="padding-top:4%;">New Password</label></div>
+									<div class="col-sm-6">
+										<input type="password" placeholder = "New Password" id = "new_password" class="form-control"/>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-2 col-sm-offset-1" style="align:center"><label style="padding-top:4%;">Confirm Password</label></div>
+									<div class="col-sm-6">
+										<input type="password" placeholder = "Confirm Password" id = "confirm_password" class="form-control"/>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-6 col-sm-offset-3" id="error_msg" style="color:red;"></div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-3 col-sm-offset-3">
+										<button type="button" class="btn btn-md btn-primary btn-block" onclick="update_password();">Submit</button>
+									</div>
+									<div class="col-sm-3">
+										<button type="button" class="btn btn-md btn-primary btn-block" onclick="cancel();">Cancel</button>
+									</div>
+								</div>
+								<br>
 							</div>
 						</div>
 					</div>
@@ -81,7 +94,6 @@
 		</div>
 		<script type="text/javascript" src = "../../bootstrap/js/jquery.min.js"></script>
 		<script type="text/javascript" src = "../../bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src = "./js/student.js"></script>
 		<script type="text/javascript">
 			window.onload = function ()
 			{

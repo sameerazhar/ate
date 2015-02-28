@@ -22,7 +22,7 @@ function get_que(week, course)
 	week_no = week;
 	course_code = course;
 	xhr.onreadystatechange = display_que;
-	xhr.open("GET", "/ate/student/server/getLabQuestion.php?course=" + course + "&week=" + week, true);
+	xhr.open("GET", "../server/studentGetLabQuestion.php?course=" + course + "&week=" + week, true);
 	xhr.send();
 }
 
@@ -93,5 +93,5 @@ function display_que()
 function attempt(week, que)
 {
 	que++;
-	window.location = "/ate/student/client/studentAttemptLab.php?course=" + course_code + "&week=" + week + "&que=" + que;
+	window.location = "./studentAttemptLab.php?course=" + course_code + "&week=" + week + "&que=" + que;
 }

@@ -2,7 +2,7 @@
 	session_start();
 	if( !isset($_SESSION["username"]) || !isset($_SESSION["usertype"]) || $_SESSION["usertype"]!= "faculty" )
 	{
-		header("Location: /ate/index.php");
+		header("Location: ../../index.php");
 	}
 	extract($_GET);
 	require_once "../../sql_connect.php";
@@ -15,10 +15,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="/ate/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/ate/bootstrap/css/mynav.css">
+		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/mynav.css">
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
-		<script type="text/javascript" src = "/ate/faculty/client/js/facultyUploadQuiz.js"></script>
+		<script type="text/javascript" src = "./js/facultyUploadQuiz.js"></script>
 		<meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	</head>
@@ -32,29 +32,25 @@
 			            <span class="icon-bar"></span>
 			            <span class="icon-bar"></span>
 		        	</button>
-		        	<div class="navbar-brand" style="color:white"></div>
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		        	<ul class="nav navbar-nav  navbar-right">
-		        		
-		            	<li><a href="/ate/faculty/client/faculty.php" style="color:white"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;Home</a></li>
-		            	
+		        		<li><a href="./faculty.php" style="color:white"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;Home</a></li>
 						<li class = "dropdown">
 						<a href="#" class = "dropdown-toggle" id = "username" data-toggle = "dropdown" style="color:white">USERNAME <b class = "caret"></b></a>
 						<ul class = "dropdown-menu">
-							<li><a href="#">Change Password</a></li>
 							<li><a href="#">Change Username</a></li>
-							<li><a href="/ate/authentication/logout.php">Log Out</a></li>
+							<li><a href="#">Change Password</a></li>
+							<li><a href="../../authentication/logout.php">Log Out</a></li>
 						</ul>
 						</li>
-						
 		          	</ul>
 		        </div>
 	    	</div>
     	</nav>
 
 		<br>
-		<div class="container" style="padding-top:4%">
+		<div class="container-fluid" style="padding-top:4%">
 			<div class = "row">
 				<div class = "col-sm-12">
 					<div class="panel panel-default">
@@ -67,10 +63,10 @@
 							<div class="row">
 								<div class="col-sm-3">
 									<ul class="nav nav-pills nav-stacked">
-										<li><a href=<?php echo "/ate/faculty/client/facultyUploadLab.php?course=" . $course_code; ?> >Lab Assignments</a></li>
-										<li><a href="/ate/faculty/client/facultyCourseRegAssign.php">Assignments</a></li>
-										<li><a href="/ate/faculty/client/facultyCourseExam.php">Exams</a></li>
-										<li class="active"><a href=<?php echo "/ate/faculty/client/facultyQuizzes.php?course=" . $course_code; ?> >Quiz</a></li>
+										<li><a href=<?php echo "./facultyUploadLab.php?course=" . $course_code; ?> >Lab Assignments</a></li>
+										<li><a href="./facultyCourseRegAssign.php">Assignments</a></li>
+										<li><a href="./facultyCourseExam.php">Exams</a></li>
+										<li class="active"><a href=<?php echo "./facultyQuizzes.php?course=" . $course_code; ?> >Quiz</a></li>
 									</ul>
 								</div>
 								<div class="col-sm-9">
@@ -79,8 +75,8 @@
 											<div class="row">
 												<div class="col-sm-12">
 													<ul class="nav nav-tabs">
-														<li><a href=<?php echo "/ate/faculty/client/facultyQuizzes.php?course=" . $course_code; ?> >Quizzes</a></li>
-														<li class="active"><a href=<?php echo "/ate/faculty/client/facultyUploadQuiz.php?course=" . $course_code; ?> >Create new Quiz</a></li>	
+														<li><a href=<?php echo "./facultyQuizzes.php?course=" . $course_code; ?> >Quizzes</a></li>
+														<li class="active"><a href=<?php echo "./facultyUploadQuiz.php?course=" . $course_code; ?> >Create new Quiz</a></li>	
 													</ul>
 												</div>
 											</div>
@@ -150,13 +146,13 @@
 											<hr style="height:2px">
 											<div class="row">
 												<div class="col-sm-12">
-													<label>Upload Quiz File (Only .xls, .xlsx or .ods format)</label>
+													<label>Upload Quiz File (Only .xls, .xlsx, .ods or .xml format)</label>
 												</div>
 											</div>
 											
 											<div class="row">
 												<div class="col-sm-6">
-													<div style="border: 1px solid;"><input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" name="quiz" id="quiz"/></div>
+													<div style="border: 1px solid;"><input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/xml" name="quiz" id="quiz"/></div>
 												</div>
 											</div>
 											<br>
@@ -183,10 +179,9 @@
 				</div>
 			</div>
 		</div>
-
-		<script type="text/javascript" src = "/ate/bootstrap/js/jquery.min.js"></script>
-		<script type="text/javascript" src = "/ate/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="/ate/bootstrap/js/bootstrap3-typeahead.js"></script>
+		<script type="text/javascript" src = "../../bootstrap/js/jquery.min.js"></script>
+		<script type="text/javascript" src = "../../bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../../bootstrap/js/bootstrap3-typeahead.js"></script>
 		<script type="text/javascript">
 			window.onload = function ()
 			{
@@ -199,7 +194,7 @@
             $("#qstn_summary").typeahead({
                 source: function(query, process) {
                     $.ajax({
-                        url: '/ate/faculty/server/facultyGetTopicQuiz.php',
+                        url: '../server/facultyGetTopicQuiz.php',
                         type: 'POST',
                         data: 'qstn_summary=' + query + "&course=" + course_code,
                         dataType: 'JSON',

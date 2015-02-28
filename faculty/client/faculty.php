@@ -2,14 +2,14 @@
 	session_start();
 	if( !isset($_SESSION["username"]) || !isset($_SESSION["usertype"]) || $_SESSION["usertype"]!= "faculty" )
 	{
-		header("Location: /ate/index.php");
+		header("Location: ../../index.php");
 	}
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="/ate/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/ate/bootstrap/css/mynav.css">
+		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/mynav.css">
 	</head>
 	<body style="background-color:#F0F0F0;">
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -21,22 +21,18 @@
 			            <span class="icon-bar"></span>
 			            <span class="icon-bar"></span>
 		        	</button>
-		        	<div class="navbar-brand" style="color:white"></div>
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		        	<ul class="nav navbar-nav  navbar-right">
-		        		<li class="divider-vertical"></li>
-		            	<li><a href="/ate/faculty/client/faculty.php" style="color:white"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;Home</a></li>
-		            	<li class="divider-vertical"></li>
+		            	<li><a href="./faculty.php" style="color:white"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;Home</a></li>
 						<li class = "dropdown">
 						<a href="#" class = "dropdown-toggle" id = "username" data-toggle = "dropdown" style="color:white">USERNAME <b class = "caret"></b></a>
 						<ul class = "dropdown-menu">
-							<li><a href="#">Change Password</a></li>
 							<li><a href="#">Change Username</a></li>
-							<li><a href="/ate/authentication/logout.php">Log Out</a></li>
+							<li><a href="#">Change Password</a></li>
+							<li><a href="../../authentication/logout.php">Log Out</a></li>
 						</ul>
 						</li>
-						<li class="divider-vertical"></li>
 		          	</ul>
 		        </div>
 	    	</div>
@@ -69,7 +65,7 @@
 											$query = "SELECT course_code, course_name FROM course WHERE course_code='" . $row["course_code"] . "'";
 											$res = mysql_query($query);
 											$row = mysql_fetch_assoc($res,MYSQL_ASSOC);
-											echo "<a href=\"/ate/faculty/client/facultyUploadLab.php?course=" . $row["course_code"] . "\" id=\"sem\"  class=\"list-group-item\">". $row["course_code"] . " - " . $row["course_name"] . "</a>";
+											echo "<a href=\"./facultyUploadLab.php?course=" . $row["course_code"] . "\" id=\"sem\"  class=\"list-group-item\">". $row["course_code"] . " - " . $row["course_name"] . "</a>";
 										}
 									}
 								?>
@@ -80,8 +76,8 @@
 			</div>
 		</div>
 		
-		<script type="text/javascript" src = "/ate/bootstrap/js/jquery.min.js"></script>
-		<script type="text/javascript" src = "/ate/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src = "../../bootstrap/js/jquery.min.js"></script>
+		<script type="text/javascript" src = "../../bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			window.onload = function ()
 			{

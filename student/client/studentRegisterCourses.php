@@ -4,7 +4,6 @@
 	{
 		header("Location: ../../index.php");
 	}
-	extract($_GET);
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +11,7 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/mynav.css">
+		<script type="text/javascript" src = "./js/studentRegisterCourses.js"></script>
 	</head>
 	<body style="background-color:#F0F0F0;">
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -23,6 +23,7 @@
 			            <span class="icon-bar"></span>
 			            <span class="icon-bar"></span>
 		        	</button>
+		        	
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		        	<ul class="nav navbar-nav  navbar-right">
@@ -39,87 +40,72 @@
 		        </div>
 	    	</div>
     	</nav>
-
+		
 		<br>
+
+
 		<div class="container" style="padding-top:4%">
 			<div class = "row">
 				<div class = "col-sm-12">
 					<div class="panel panel-default">
 						<div class = "panel-body">
 							<div class = "page-header">
-								<?php
-									require_once "../../sql_connect.php";
-									$query = "SELECT course_name FROM course WHERE course_code='" . $course . "'";
+								<h2 style = "padding-left:5%">Register Courses</h2>
+							</div>
+							<br>
+							
+							<?php
+								require_once '../../sql_connect.php';
+								$query = "SELECT sem FROM student WHERE usn='" . $_SESSION["username"] . "'";
+								$result = mysql_query($query);
+								$num = mysql_num_rows($result);
+								if( $num == 0 )
+								{
+									echo "<h3 style = \"color:red;padding-left:3%\">Some error occured, try after some time.</h3>";
+								}
+								else
+								{
+									$row = mysql_fetch_assoc($result,MYSQL_ASSOC);
+									$query = "SELECT course_code, course_name FROM course WHERE sem='" . $row["sem"] . "'";
 									$result = mysql_query($query);
 									$num = mysql_num_rows($result);
 									if( $num == 0 )
 									{
-										echo "<h2 style = \"padding-left:5%;color:red;\">";
-										echo "Server Error Occured. Try again later.";
+										echo "<h3 style = \"color:red;padding-left:3%\">Some error occured, try after some time.</h3>";
 									}
 									else
 									{
-										echo "<h2 style = \"padding-left:5%;\">";
-										$row = mysql_fetch_assoc($result, MYSQL_ASSOC);
-										echo $row["course_name"] . " - " . $course;
+										for( $i = 0; $i < $num; $i++ )
+										{
+							?>
+											<div class="row">
+											<div class="col-sm-11 col-sm-offset-1">
+							
+							<?php
+											$row = mysql_fetch_assoc($result,MYSQL_ASSOC);
+											echo "<div class=\"checkbox\">";
+											echo "<label>";
+											echo "<input type=\"checkbox\" checked value=\"" . $row["course_code"] . "\">" . $row["course_code"] . " - " . $row["course_name"];
+											echo "</label>";
+											echo "</div>";
+							?>
+											</div>
+											</div>
+							<?php
+										}
 									}
-									echo "</h2>";
-								?>
-							</div>
-							<br>
-							<div>
-								<ul class="nav nav-tabs">
-									<li class="active"><a href="<?php echo "./studentLab.php?course=" . $course?>">Lab Assignments</a></li>
-									<li><a href="#">Assignments</a></li>
-									<li><a href="#">Exams</a></li>
-									<li><a href="<?php echo "./studentQuiz.php?course=" . $course?>">Quiz</a></li>
-									
-								</ul>
-							</div>
-							<br>
-							<br>
-							<div>
-								<div class="list-group">
-									<?php
-										$query = "SELECT assign_id FROM assignment WHERE course_code='" . $course . "'";
-										$result = mysql_query($query);
-										$num = mysql_num_rows($result);
-										if( $num == 0 )
-										{
-											echo "<h3 style = \"color:red;padding-left:5%\">No Lab Assignments</h3>";
-										}
-										else
-										{
-											$week_no = array();
-											$assign_no = array();
-											$i = 0;
-											for( $var = 0; $var < $num; $var++ )
-											{
-												$row = mysql_fetch_assoc($result,MYSQL_ASSOC);
-												if( strncasecmp("Week_", $row["assign_id"], 5) == 0 )
-												{
-													$week = explode("_", $row["assign_id"]);
-													$week_no[$i] = $week[1];
-													$assign_no[$i] = $week[2];
-													$i++;
-												}
-											}
-
-											$week_no = array_unique($week_no);
-											sort($week_no);
-											$len = sizeof($week_no);
-											for( $var = 0; $var < $len; $var++ )
-											{
-												echo "<a class=\"list-group-item\" href=\"javascript:get_que('" . $week_no[$var] . "','" . $course . "')\">Week - " . $week_no[$var] . "</a>";
-												?>
-												<div style="display:none;" class = <?php echo "class_que".$week_no[$var]; ?> id = <?php echo "que".$week_no[$var]; ?> >
-												</div>
-												<?php
-											}
-										}
-									?>
+								}
+							?>
+								<br>
+								<div class="row">
+									<div class="col-sm-2 col-sm-offset-1">
+										<button class = "btn btn-primary btn-block" onclick="register();">Register</button>
+									</div>
+									<div class="col-sm-2">
+										<a href="./student.php" class = "btn btn-primary btn-block">Cancel</a>
+									</div>
 								</div>
-							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -127,7 +113,6 @@
 		</div>
 		<script type="text/javascript" src = "../../bootstrap/js/jquery.min.js"></script>
 		<script type="text/javascript" src = "../../bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src = "./js/studentLab.js"></script>
 		<script type="text/javascript">
 			window.onload = function ()
 			{

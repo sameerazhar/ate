@@ -34,7 +34,14 @@ function upload_file(course_code)
 			form = new FormData();
 			form.append("quiz", file.files[0]);
 			form.append("course_code", course_code);
-			xhr_upload_file.open("POST", "/ate/faculty/server/facultyUploadQuiz.php", true);
+			if(document.getElementById("quiz").value.match(/\.([^\.]+)$/)[1] == 'xml')
+			{
+				xhr_upload_file.open("POST", "../server/facultyUploadQuizXML.php", true);
+			}
+			else
+			{
+				xhr_upload_file.open("POST", "../server/facultyUploadQuiz.php", true);
+			}
 			xhr_upload_file.send(form);
 		}
 	}
@@ -70,6 +77,7 @@ function checkExtension()
         case 'xls':
         case 'xlsx':
         case 'ods':
+        case 'xml':
        		return true;
             break;
         default:
@@ -117,7 +125,7 @@ function generate_quiz(course_code)
 		var encodedtime = encodeNameAndValue("time_period", time_period);
 		var encodedenabled = encodeNameAndValue("enabled", enabled);
 		xhr_generate_quiz = getXmlHttpObject();
-		xhr_generate_quiz.open("POST","/ate/faculty/server/facultyCreateQuiz.php",true);
+		xhr_generate_quiz.open("POST","../server/facultyCreateQuiz.php",true);
 		xhr_generate_quiz.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhr_generate_quiz.onreadystatechange = generate_quiz_response;      
 		xhr_generate_quiz.send(encodedquizname + "&" + encodedqstntype + "&" + encodedeasy + "&" + encodedmed + "&" + encodedhard + "&" + encodedcourse + "&" + encodedtime + "&" + encodedenabled);
@@ -141,5 +149,5 @@ function generate_quiz_response()
 }
 function cancel()
 {
-	location="/ate/faculty/client/faculty.php";
+	window.location="./faculty.php";
 }

@@ -2,7 +2,7 @@
 	session_start();
 	if( !isset($_SESSION["username"]) || !isset($_SESSION["usertype"]) || $_SESSION["usertype"]!= "student" )
 	{
-		header("Location: /ate/index.php");
+		header("Location: ../../index.php");
 	}
 	extract($_GET);
 	$course = trim($course);
@@ -11,15 +11,16 @@
 	$query = "SELECT * FROM quiz_student WHERE quiz_id=" . $quiz_id . " AND usn='" . $_SESSION["username"] . "'";
 	$result = mysql_query($query);
 	$row = mysql_fetch_assoc($result, MYSQL_ASSOC);
-	if( $row["started"] == 2 )
-	{
-		header("Location: /ate/student/client/studentQuiz.php?course=$course");
-	}
+	$hasstarted = $row["started"];
 	$time_period = $row["remaining_time"];
 	$course_code = $course;
 	$query = "SELECT * FROM quiz WHERE quiz_id=" . $quiz_id;
 	$result = mysql_query($query);
 	$row = mysql_fetch_assoc($result, MYSQL_ASSOC);
+	if( $hasstarted == 2 || $row["enable"] == 0 )
+	{
+		header("Location: ./studentQuiz.php?course=$course");
+	}
 	$quiz_name = $row["quiz_name"];
 	$query = "SELECT course_name FROM course WHERE course_code='" . $course . "'";
 	$result = mysql_query($query);
@@ -39,8 +40,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="/ate/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/ate/bootstrap/css/mynav.css">
+		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../bootstrap/css/mynav.css">
 		<script type="text/javascript">
 			quiz_id = <?php echo "$quiz_id";?>;
 			course = <?php echo "'$course'"; ?>;
@@ -171,8 +172,8 @@
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript" src = "/ate/bootstrap/js/jquery.min.js"></script>
-		<script type="text/javascript" src = "/ate/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src = "/ate/student/client/js/studentAttemptQuiz.js"></script>
+		<script type="text/javascript" src = "../../bootstrap/js/jquery.min.js"></script>
+		<script type="text/javascript" src = "../../bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src = "./js/studentAttemptQuiz.js"></script>
 	</body>
 </html>

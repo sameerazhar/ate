@@ -5,6 +5,12 @@
 		header("Location: ../../index.php");
 	}
 	extract($_GET);
+	require_once "../../sql_connect.php";
+	$query = "SELECT * FROM course WHERE course_code='" . $course . "'";
+	$res = mysql_query($query);
+	$row = mysql_fetch_assoc($res,MYSQL_ASSOC);
+	$course_name = $row["course_name"];
+	$course_code = $course;
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +29,7 @@
 			            <span class="icon-bar"></span>
 			            <span class="icon-bar"></span>
 		        	</button>
+		        	
 		        </div>
 		        <div id="navbar" class="navbar-collapse collapse">
 		        	<ul class="nav navbar-nav  navbar-right">
@@ -48,8 +55,7 @@
 						<div class = "panel-body">
 							<div class = "page-header">
 								<?php
-									require_once "../../sql_connect.php";
-									$query = "SELECT course_name FROM course WHERE course_code='" . $course . "'";
+									$query = "SELECT course_name FROM course WHERE course_code='" . $course_code . "'";
 									$result = mysql_query($query);
 									$num = mysql_num_rows($result);
 									if( $num == 0 )
@@ -61,7 +67,7 @@
 									{
 										echo "<h2 style = \"padding-left:5%;\">";
 										$row = mysql_fetch_assoc($result, MYSQL_ASSOC);
-										echo $row["course_name"] . " - " . $course;
+										echo $row["course_name"] . " - " . $course_code;
 									}
 									echo "</h2>";
 								?>
@@ -69,55 +75,23 @@
 							<br>
 							<div>
 								<ul class="nav nav-tabs">
-									<li class="active"><a href="<?php echo "./studentLab.php?course=" . $course?>">Lab Assignments</a></li>
+									<li><a href=<?php echo "./studentLab.php?course=" . $course_code?> >Lab Assignments</a></li>
 									<li><a href="#">Assignments</a></li>
 									<li><a href="#">Exams</a></li>
-									<li><a href="<?php echo "./studentQuiz.php?course=" . $course?>">Quiz</a></li>
+									<li class="active"><a href=<?php echo "\"./studentQuiz.php?course=" . $course_code . "\"";?> >Quiz</a></li>
 									
 								</ul>
 							</div>
 							<br>
+							<div class="row">
+								<div class="col-sm-12">
+									<center><h3>Quiz submitted successfully.</h3></center>
+								</div>
+							</div>
 							<br>
-							<div>
-								<div class="list-group">
-									<?php
-										$query = "SELECT assign_id FROM assignment WHERE course_code='" . $course . "'";
-										$result = mysql_query($query);
-										$num = mysql_num_rows($result);
-										if( $num == 0 )
-										{
-											echo "<h3 style = \"color:red;padding-left:5%\">No Lab Assignments</h3>";
-										}
-										else
-										{
-											$week_no = array();
-											$assign_no = array();
-											$i = 0;
-											for( $var = 0; $var < $num; $var++ )
-											{
-												$row = mysql_fetch_assoc($result,MYSQL_ASSOC);
-												if( strncasecmp("Week_", $row["assign_id"], 5) == 0 )
-												{
-													$week = explode("_", $row["assign_id"]);
-													$week_no[$i] = $week[1];
-													$assign_no[$i] = $week[2];
-													$i++;
-												}
-											}
-
-											$week_no = array_unique($week_no);
-											sort($week_no);
-											$len = sizeof($week_no);
-											for( $var = 0; $var < $len; $var++ )
-											{
-												echo "<a class=\"list-group-item\" href=\"javascript:get_que('" . $week_no[$var] . "','" . $course . "')\">Week - " . $week_no[$var] . "</a>";
-												?>
-												<div style="display:none;" class = <?php echo "class_que".$week_no[$var]; ?> id = <?php echo "que".$week_no[$var]; ?> >
-												</div>
-												<?php
-											}
-										}
-									?>
+							<div class="row">
+								<div class="col-sm-2 col-sm-offset-5">
+									<center><a href = <?php echo "\"./studentQuiz.php?course=" . $course . "\""; ?> class = "btn btn-default btn-block" >OK</a></center>
 								</div>
 							</div>
 						</div>
@@ -127,7 +101,6 @@
 		</div>
 		<script type="text/javascript" src = "../../bootstrap/js/jquery.min.js"></script>
 		<script type="text/javascript" src = "../../bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src = "./js/studentLab.js"></script>
 		<script type="text/javascript">
 			window.onload = function ()
 			{

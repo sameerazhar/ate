@@ -30,7 +30,7 @@ function disable_quiz(quiz_id)
 
 	var quiz = encodeNameAndValue("quiz_id", quiz_id);
 	var disable = encodeNameAndValue("disable", "yes");
-	xhr_disable_quiz.open("GET", "/ate/faculty/server/facultyQuizzes.php?" + quiz + "&" + disable, true);
+	xhr_disable_quiz.open("GET", "../server/facultyQuizzes.php?" + quiz + "&" + disable, true);
 	xhr_disable_quiz.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr_disable_quiz.send();
 }
@@ -78,7 +78,7 @@ function delete_quiz(quiz_id)
 
 		var quiz = encodeNameAndValue("quiz_id", quiz_id);
 		var delete_q = encodeNameAndValue("delete", "yes");
-		xhr_delte_quiz.open("GET", "/ate/faculty/server/facultyQuizzes.php?" + quiz + "&" + delete_q, true);
+		xhr_delte_quiz.open("GET", "../server/facultyQuizzes.php?" + quiz + "&" + delete_q, true);
 		xhr_delte_quiz.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhr_delte_quiz.send();
 	}
@@ -111,5 +111,5 @@ function evaluate_quiz(quiz_id, course)
 {
 	var encodedQuiz_id = encodeNameAndValue("quiz_id", quiz_id);
 	var encodedCourse = encodeNameAndValue("course", course);
-	window.location = "/ate/faculty/client/facultyEvaluateQuiz.php?" + encodedQuiz_id + "&" + encodedCourse;
+	window.location = "./facultyEvaluateQuiz.php?" + encodedQuiz_id + "&" + encodedCourse;
 }

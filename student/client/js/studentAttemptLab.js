@@ -47,7 +47,7 @@ function fetch_files()
 	tabContent = document.getElementById("tabContent");
 	xhr_get_file = getXmlHttpObject();
 	xhr_get_file.onreadystatechange = display_files;
-	xhr_get_file.open("GET", "/ate/student/server/fetchFilesLab.php?lang=" + lang + "&week=" + week + "&course=" + course + "&que=" + que);
+	xhr_get_file.open("GET", "../server/studentFetchFilesLab.php?lang=" + lang + "&week=" + week + "&course=" + course + "&que=" + que);
 	xhr_get_file.send();
 }
 
@@ -219,7 +219,7 @@ function save_code(id, content)
 	// alert(id.slice(1, id.length));
 	xhr_save_file = getXmlHttpObject();
 	xhr_save_file.onreadystatechange = save_response;
-	xhr_save_file.open("POST", "/ate/student/server/saveFileLab.php", true);
+	xhr_save_file.open("POST", "../server/studentSaveFileLab.php", true);
 	xhr_save_file.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	var file = get_file_name(id);
 	// alert(content);
@@ -279,7 +279,7 @@ function create_file()
 	}
 	xhr_create_file = getXmlHttpObject();
 	xhr_create_file.onreadystatechange = create_file_response;
-	xhr_create_file.open("GET", "/ate/student/server/createFileLab.php?file=" + file_name + "&course=" + course + "&week=" + week + "&que=" + que + "&lang=" + lang, true);
+	xhr_create_file.open("GET", "../server/studentCreateFileLab.php?file=" + file_name + "&course=" + course + "&week=" + week + "&que=" + que + "&lang=" + lang, true);
 	xhr_create_file.send();
 }
 
@@ -379,7 +379,7 @@ function delete_file()
 	}
 	xhr_delete_file = getXmlHttpObject();
 	xhr_delete_file.onreadystatechange = delete_file_response;
-	xhr_delete_file.open("GET", "/ate/student/server/deleteFileLab.php?file=" + file_name + "&course=" + course + "&week=" + week + "&que=" + que + "&lang=" + lang, true);
+	xhr_delete_file.open("GET", "../server/studentDeleteFileLab.php?file=" + file_name + "&course=" + course + "&week=" + week + "&que=" + que + "&lang=" + lang, true);
 	xhr_delete_file.send();
 }
 
@@ -491,7 +491,7 @@ function execute()
 	}
 	xhr_execute = getXmlHttpObject();
 	xhr_execute.onreadystatechange = execute_response;
-	xhr_execute.open("GET", "/ate/student/server/executeLab.php?course=" + course + "&week=" + week + "&que=" + que + "&lang=" + lang + "&main_file=" + main_file + "&cmplfiles=" + cmplfiles, true);
+	xhr_execute.open("GET", "../server/studentExecuteLab.php?course=" + course + "&week=" + week + "&que=" + que + "&lang=" + lang + "&main_file=" + main_file + "&cmplfiles=" + cmplfiles, true);
 	xhr_execute.send();
 }
 
@@ -556,7 +556,7 @@ function repeated_code()
 	encodedQue = encodeNameAndValue("que", que);
 	encodedLang = encodeNameAndValue("lang", lang);
 	encodedNumTokens = encodeNameAndValue("num_tokens", num_tokens);
-	xhr_repeated_code.open("GET", "/ate/student/server/findRepeatedCode.php?" + encodedCourse + "&" + encodedWeek + "&" + encodedQue + "&" + encodedLang + "&" + encodedNumTokens, true);
+	xhr_repeated_code.open("GET", "../server/studentFindRepeatedCode.php?" + encodedCourse + "&" + encodedWeek + "&" + encodedQue + "&" + encodedLang + "&" + encodedNumTokens, true);
 	xhr_repeated_code.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr_repeated_code.send();
 }
