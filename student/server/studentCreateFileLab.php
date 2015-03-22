@@ -28,30 +28,30 @@
 
 	if( strcasecmp($lang, "C") == 0 )
 	{
-		$fd = fopen("/var/www/html" . $row["file_path"] . $file, "w") or die("ERROR");
+		$fd = fopen("../../" . $row["file_path"] . $file, "w") or die("ERROR");
 		$files = $files . $file . ";";
 		fclose($fd);
 	}
-	if( strcasecmp($lang, "C++") == 0 )
+	if( strcasecmp($lang, "cpp") == 0 )
 	{
-		$fd = fopen("/var/www/html" . $row["file_path"] . $file, "w") or die("ERROR");
+		$fd = fopen("../../" . $row["file_path"] . $file, "w") or die("ERROR");
 		$files = $files . $file . ";";
 		fclose($fd);
 	}
 	if( strcasecmp($lang, "Java") == 0 )
 	{
-		$fd = fopen("/var/www/html" . $row["file_path"] . $file, "w") or die("ERROR");
+		$fd = fopen("../../" . $row["file_path"] . $file, "w") or die("ERROR");
 		$files = $files . $file . ";";
 		fclose($fd);
 	}
 	if( strcasecmp($lang, "Python") == 0 )
 	{
-		$fd = fopen("/var/www/html" . $row["file_path"] . $file, "w") or die("ERROR");
+		$fd = fopen("../../" . $row["file_path"] . $file, "w") or die("ERROR");
 		$files = $files . $file . ";";
 		fclose($fd);
 	}
 	$query = $query = "UPDATE program SET files='" . $files . "' WHERE usn='" . $usn . "' and course_code='" . $course . "' and assign_id='week_" . $week . "_" . $que ."'";
 	$result = mysql_query($query);
-	echo "/var/www/html" . $row["file_path"] . $file;
+	echo "../../" . $row["file_path"] . $file;
 
 ?>

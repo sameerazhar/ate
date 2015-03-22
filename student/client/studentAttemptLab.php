@@ -98,7 +98,7 @@
 										else
 										{
 											$row = mysql_fetch_assoc($result,MYSQL_ASSOC);
-											$question = file_get_contents( "http://localhost" . $row['que_path']);
+											$question = file_get_contents( "../../" . $row['que_path']);
 											echo "<div style = \"padding-left:3%;padding-right:3%\">" . $question . "</div>";
 										}
 									?>
@@ -156,7 +156,14 @@
 														echo "<script type=\"text/javascript\">set_data('" . $lang[0] . "', '" . $week . "', '" . $course . "', '" . $que . " ')</script>";
 														for( $var  = 0; $var < sizeof($lang) - 1; $var++ )
 														{
-															echo "<option>" . $lang[$var] . "</option>";
+															if( $lang[$var] == "cpp" )
+															{
+																echo "<option>C++</option>";
+															}
+															else
+															{
+																echo "<option>" . $lang[$var] . "</option>";
+															}
 														}
 													?>
 													</select>
@@ -214,6 +221,44 @@
 								
 												<div class="col-sm-12" id = "cmd">
 													
+												</div>
+											</div>
+											<br>
+											<div style="display:none;padding-left:3%;padding-right:3%;" id = "repeated_code_window">
+												<div class="panel panel-default">
+													<div class="panel-body">
+														<div class="row">
+															<div class="col-sm-8">
+																<h2>Summary of Repeated Code</h2>
+															</div>
+															<div class="col-sm-4">
+																<div class="pull-right">
+																	<button class="btn btn-info" onclick="minimize_repeated_div();">--</button>
+																	<button class="btn btn-danger" onclick="close_repeated_div();">X</button>
+																</div>
+															</div>
+														</div>
+														<div class="row" id = "frame_repeated_div">
+															<div class="col-sm-12">
+																	<iframe src="#" id = "repeated" width="100%" height="500px"></iframe>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<br>
+											<div class="row" style="padding-left:3%;padding-right:3%">
+												<div class="col-sm-12">
+													<div class="panel panel-default" style="display:none;" id = "analysis_window">
+														<div class="panel-body">
+															<div class="page-header" style="padding-left:5%;padding-right:5%;">
+																<h3 id = "analysis_heading">Code Analysis Result:</h3>
+															</div>
+															<div class="row" style="padding-left:3%;padding-right:3%;">
+																<div class="col-sm-12" id = "analysis"></div>
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
 											<br>

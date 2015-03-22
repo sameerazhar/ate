@@ -50,7 +50,7 @@
     	</nav>
 
 		<br>
-		<div class="container-fluid" style="padding-top:4%">
+		<div class="container" style="padding-top:4%">
 			<div class = "row">
 				<div class = "col-sm-12">
 					<div class="panel panel-default">

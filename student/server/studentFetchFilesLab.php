@@ -31,8 +31,8 @@
 	}
 	if( strcasecmp($lang, "C") == 0 )
 	{
-		$cfiles = glob( "/var/www/html" . $row["file_path"] . "*.c");
-		$hfiles = glob( "/var/www/html" . $row["file_path"] . "*.h");
+		$cfiles = glob( "../../" . $row["file_path"] . "*.c");
+		$hfiles = glob( "../../" . $row["file_path"] . "*.h");
 		foreach( $cfiles as $file )
 		{
 			$files[] = $file;
@@ -43,10 +43,10 @@
 			$files[] = $file;
 		}
 	}
-	else if( strcasecmp($lang, "C++") == 0 )
+	else if( strcasecmp($lang, "cpp") == 0 )
 	{
-		$cfiles = glob( "/var/www/html" . $row["file_path"] . "*.cpp");
-		$hfiles = glob( "/var/www/html" . $row["file_path"] . "*.h");
+		$cfiles = glob( "../../" . $row["file_path"] . "*.cpp");
+		$hfiles = glob( "../../" . $row["file_path"] . "*.h");
 		$files = array();
 		foreach( $cfiles as $file )
 		{
@@ -60,7 +60,7 @@
 	}
 	else if( strcasecmp($lang, "Java") == 0 )
 	{
-		$jfiles = glob( "/var/www/html" . $row["file_path"] . "*.java");
+		$jfiles = glob( "../../" . $row["file_path"] . "*.java");
 		$files = array();
 		foreach( $jfiles as $file )
 		{
@@ -69,7 +69,7 @@
 	}
 	else if( strcasecmp($lang, "Python") == 0 )
 	{
-		$pfiles = glob( "/var/www/html" . $row["file_path"] . "*.py");
+		$pfiles = glob( "../../" . $row["file_path"] . "*.py");
 		$files = array();
 		foreach( $pfiles as $file )
 		{

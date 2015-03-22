@@ -134,11 +134,116 @@
 													</div>
 													<br>
 													<div class="row">
-														<div class="col-sm-3">
-															<label style="padding-top:4%;">Output Delimiter:</label>
-														</div>
 														<div class="col-sm-4">
-															<input type="text" id = "delimit" class="form-control" placeholder = "Output Delimiter" />
+															<div class="checkbox">
+																<label><input type = "checkbox" id = "exact_output" value="disbled" onchange="show_output_div();" /> Compare exact output</label>
+															</div>
+														</div>
+													</div>
+													<br>
+													<div id = "output_para">
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="panel panel-default">
+																	<div class="panel-body">
+																		<ul id="outputTab" class="nav nav-tabs">
+																			<li class="active"  onclick="set('text');">
+																				<a href="#text" data-toggle="tab">Text</a>
+																			</li>
+																			<li  onclick="set('number');">
+																				<a href="#number" data-toggle="tab">Digits</a>
+																			</li>
+																			<li onclick="set('textNumber');">
+																				<a href="#textNumber" data-toggle="tab">Text with Digits</a>
+																			</li>
+																			<li onclick="set('regex');">
+																				<a href="#regex" data-toggle="tab">Regex Compare</a>
+																			</li>
+																		</ul>
+																		<br>
+																		<div id="outputTabContent" class="tab-content">
+																			<div class="tab-pane fade in active" id="text">
+																				<div class="row">
+																					<div class="col-sm-2">
+																						<label style="padding-top:4%;">Delimiter: </label>
+																					</div>
+																					<div class="col-sm-4">
+																						<input type="text" id = "testDelimit" class="form-control" placeholder = "Enter Delimiter" />
+																					</div>
+																				</div>
+																				<br>
+																				<div class="row">
+																					<div class="col-sm-2">
+																						<div class="checkbox">
+																							<label><input type = "checkbox" id = "ordered_output" value="disbled" /> Ordered</label>
+																						</div>
+																					</div>
+																					<div class="col-sm-3">
+																						<div class="checkbox">
+																							<label><input type = "checkbox" id = "caseSensitive_output" value="disbled" /> Case Sensitive</label>
+																						</div>
+																					</div>
+																					<div class="col-sm-2">
+																						<div class="checkbox">
+																							<label><input type = "checkbox" id = "textNoise_output" value="disbled" /> Noise Words</label>
+																						</div>
+																					</div>
+																					<div class="col-sm-5">
+																						<div class="checkbox">
+																							<label><input type = "checkbox" id = "firstChar_output" value="disbled" /> Match First Character (T / True / N / no )</label>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="tab-pane fade in" id="number">
+																				<div class="row">
+																					<div class="col-sm-2">
+																						<label style="padding-top:4%;">Delimiter: </label>
+																					</div>
+																					<div class="col-sm-4">
+																						<input type="text" id = "numberDelimit" class="form-control" placeholder = "Enter Delimiter" />
+																					</div>
+																					<div class="col-sm-2">
+																						<label style="padding-top:4%;">Difference: </label>
+																					</div>
+																					<div class="col-sm-4">
+																						<input type="number" min = "0" value="0" id = "numberDiffrence" class="form-control" placeholder = "Enter Difference" />
+																					</div>
+																				</div>
+																				<br>
+																				<div class="row">
+																					<div class="col-sm-2">
+																						<div class="checkbox">
+																							<label><input type = "checkbox" id = "ordered_output" value="disbled" /> Ordered</label>
+																						</div>
+																					</div>
+																					<div class="col-sm-3">
+																						<div class="checkbox">
+																							<label><input type = "checkbox" id = "numberNoise_output" value="disbled" /> Noise Words</label>
+																						</div>
+																					</div>
+																					<div class="col-sm-4">
+																						<div class="checkbox">
+																							<label><input type = "checkbox" id = "numberBase_output" value="disbled" /> Number with any base</label>
+																						</div>
+																					</div>
+																					<div class="col-sm-3">
+																						<div class="checkbox">
+																							<label><input type = "checkbox" id = "numberRange_output" value="disbled" /> Range compare</label>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="tab-pane fade in" id="textNumber">
+																				text with number
+																			</div>
+																			<div class="tab-pane fade in" id="regex">
+																				Regex Compare
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
 														</div>
 													</div>
 													<br>

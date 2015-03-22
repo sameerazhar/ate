@@ -4,15 +4,15 @@
 	{
 		if( $_SESSION["usertype"]=="admin")
 		{
-			header("Location: /ate/admin/client/admin.php");
+			header("Location: admin/client/admin.php");
 		}
 		elseif( $_SESSION["usertype"]=="student")
 		{
-			header("Location: /ate/student/client/student.php");
+			header("Location: student/client/student.php");
 		}
 		elseif( $_SESSION["usertype"]=="faculty")
 		{
-			header("Location: /ate/faculty/client/faculty.php");
+			header("Location: faculty/client/faculty.php");
 		}
 	}
 	
@@ -21,7 +21,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="/ate/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 	</head>
 	<body style="background-color:#F0F0F0;">
 		<nav class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
@@ -207,8 +207,8 @@
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript" src = "/ate/bootstrap/js/jquery.min.js"></script>
-		<script type="text/javascript" src = "/ate/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src = "/ate/authentication/login.js"></script>
+		<script type="text/javascript" src = "bootstrap/js/jquery.min.js"></script>
+		<script type="text/javascript" src = "bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src = "authentication/login.js"></script>
 	</body>
 </html>

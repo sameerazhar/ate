@@ -26,7 +26,7 @@
 
 
 
-	$cmd = "../../pmd-bin-5.2.3/bin/run.sh cpd --minimum-tokens " . $num_tokens . " --language " . strtolower($lang) . " --files /var/www/html" . $row["file_path"] . " --format net.sourceforge.pmd.cpd.XMLRenderer > /var/www/html" . $row["file_path"] . "atecpd.xml";
+	$cmd = "../../pmd-bin-5.2.3/bin/run.sh cpd --minimum-tokens " . $num_tokens . " --language " . strtolower($lang) . " --files ../../" . $row["file_path"] . " --format net.sourceforge.pmd.cpd.XMLRenderer > ../../" . $row["file_path"] . "atecpd.xml";
 	//echo $cmd;
 	$res = shell_exec($cmd);
 	if( !is_null($res) )
@@ -35,7 +35,7 @@
 		return;
 	}
 
-	$cmd_gen = "xsltproc ../../test.xsl /var/www/html" . $row["file_path"] . "atecpd.xml > /var/www/html" . $row["file_path"] . "atecpdtest.html";
+	$cmd_gen = "xsltproc ../../test.xsl ../../" . $row["file_path"] . "atecpd.xml > ../../" . $row["file_path"] . "atecpdtest.html";
 
 	$res = shell_exec($cmd_gen);
 	if( !is_null($res) )
@@ -44,7 +44,7 @@
 		return;
 	}
 
-	echo $row["file_path"] . "atecpdtest.html";
+	echo "/ate/" . $row["file_path"] . "atecpdtest.html";
 
 	//echo $res;
 ?>

@@ -38,7 +38,7 @@
 	}
 	$row = mysql_fetch_assoc($result,MYSQL_ASSOC);
 
-	unlink("/var/www/html" . $row["file_path"] . $file) or die("ERROR");
+	unlink("../../" . $row["file_path"] . $file) or die("ERROR");
 	$files = $row["files"];
 	$list = explode(";", $files);
 	$list = myremove($list, $file);
@@ -46,5 +46,5 @@
 	$query = $query = "UPDATE program SET files='" . $files . "' WHERE usn='" . $usn . "' and course_code='" . $course . "' and assign_id='week_" . $week . "_" . $que ."'";
 	$result = mysql_query($query);
 
-	echo "/var/www/html" . $row["file_path"] . $file;
+	echo "../../" . $row["file_path"] . $file;
 ?>

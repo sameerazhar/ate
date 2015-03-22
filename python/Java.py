@@ -1,4 +1,5 @@
 from Program import *
+import re
 class Java(Program):
 	def __init__(self, usn, course, assign, file_path, files, main_file):
 		Program.__init__(self, usn, course, assign, file_path, files, main_file);
@@ -34,6 +35,7 @@ class Java(Program):
 			return error;
 
 	def execute(self):
+		return "";
 		conn = pymysql.connect(host="localhost", user="root",passwd="mysql");
 		cur = conn.cursor();
 		cur.execute("use ate");
@@ -74,3 +76,27 @@ class Java(Program):
 			print(e);
 
 		print(output);
+
+	def staticAnalysis(self):
+		analyzed = False;
+		output = "";
+
+		try:
+			cmd = "../../../../../pmd-bin-5.2.3/bin/run.sh pmd -d " + self.main_file + " ";
+			for f in self.files:
+				cmd = cmd + f + " ";
+			cmd = cmd + " -f text -R ../../../../../pmd-bin-5.2.3/MyRules.xml  -version 1.7 -language java 1>analysis_error.txt ";
+			cmd = cmd.strip();
+			output = check_output(cmd, shell=True);
+		except Exception as e:
+			print("Some error occured.");
+			exit(0);
+		fd = open("analysis_error.txt", "r");
+		error = "analysis_error";
+		line = fd.read();
+		while line:
+			line = re.sub(r'/var/www/html/ate/studentData/.*?/.*?/.*?/.*?/(.*?\.java)', r'\1', line.rstrip())
+			error = error + line;
+			line = fd.read();
+		os.remove("analysis_error.txt");
+		return error;

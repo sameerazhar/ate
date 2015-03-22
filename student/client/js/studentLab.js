@@ -32,7 +32,6 @@ function display_que()
 	{
 		if(xhr.status == 200 || xhr.status == 304)
 		{
-			
 			if( xhr.responseText == "NA" )
 			{
 				que_div.innerHTML = "<div style=\"padding-left:5%\"><br>No Questions<br><br></div>";

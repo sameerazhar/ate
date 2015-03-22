@@ -1,14 +1,34 @@
+function getXmlHttpObject()
+{
+	var xmlhttp;
+	if(window.XMLHttpRequest)
+	{
+		// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	}
+	else
+	{
+		// code for IE6, IE5
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	} 
+	return xmlhttp;		
+}
+
 var app = angular.module("facultyApp", []);
 
 
 var _t_c = 0;
 
+function set(data)
+{
+	outputType = data;
+}
+
 function upload_labAssign()
 {
-	//alert("OK IN");
 	try
 	{
-		xhr_labAssign = new XMLHttpRequest();
+		xhr_labAssign = getXmlHttpObject();
 		form = new FormData();
 		var week_num = document.getElementById("week_num").value;
 		var assign_num = document.getElementById("assign_num").value;
@@ -23,7 +43,7 @@ function upload_labAssign()
 			form.append("inputfile" + i, inputfile.files[0]);
 			form.append("outputfile" + i, outputfile.files[0]);
 		}
-		xhr_labAssign.onreadystatechange = labAssign_response;
+		xhr_labAssign.onreadystatechange = upload_labAssign_response;
 	}
 	catch(e)
 	{
@@ -31,48 +51,14 @@ function upload_labAssign()
 	}
 }
 
+function upload_labAssign_response()
+{
+
+}
+
+
 app.controller("facultyController", function($scope) {
-	//$scope.tpl = {};
 	$scope.data = {};
-	/*$scope.ids = new Array("lab", "assign", "exam", "quiz");
-	$scope.tpl.url = "labAssign.php";
-	$("#lab").on("click", function(){
-		$scope.tpl.url="labAssign.php";
-		$scope.$apply();
-		for(var i = 0; i < $scope.ids.length; i++)
-		{
-			document.getElementById($scope.ids[i]).setAttribute("class", "");	
-		}
-		document.getElementById("lab").setAttribute("class", "active");
-	});
-	$("#assign").on("click", function(){
-		$scope.tpl.url="regAssign.php";
-		$scope.$apply();
-		for(var i = 0; i < $scope.ids.length; i++)
-		{
-			document.getElementById($scope.ids[i]).setAttribute("class", "");	
-		}
-		document.getElementById("assign").setAttribute("class", "active");
-	});
-	$("#exam").on("click", function(){
-		$scope.tpl.url="examAssign.php";
-		$scope.$apply();
-		for(var i = 0; i < $scope.ids.length; i++)
-		{
-			document.getElementById($scope.ids[i]).setAttribute("class", "");	
-		}
-		document.getElementById("exam").setAttribute("class", "active");
-	});
-	$("#quiz").on("click", function(){
-		$scope.tpl.url="quizAssign.php";
-		$scope.$apply();
-		for(var i = 0; i < $scope.ids.length; i++)
-		{
-			document.getElementById($scope.ids[i]).setAttribute("class", "");	
-		}
-		document.getElementById("quiz").setAttribute("class", "active");
-	});
-*/
 });
 
 app.filter("range", function() {
@@ -85,3 +71,17 @@ app.filter("range", function() {
 		return arr;
 	}
 });
+
+function show_output_div()
+{
+	var exact_output = document.getElementById("exact_output");
+	var output_div = document.getElementById("output_para");
+	if( exact_output.checked )
+	{
+		output_div.style.display = "none";
+	}
+	else
+	{
+		output_div.style.display = "block";
+	}
+}

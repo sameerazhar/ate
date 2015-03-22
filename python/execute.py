@@ -24,19 +24,22 @@ data = cur.fetchall()[0];
 
 if lang == "C":
 	prog = C(data[0], data[2], data[1], data[3], cmplfiles, main_file);
-elif lang == "Cpp":
-	print("CPP");
+elif lang == "cpp":
+	prog = Cpp(data[0], data[2], data[1], data[3], cmplfiles, main_file);
 elif lang == "Java":
 	prog = Java(data[0], data[2], data[1], data[3], cmplfiles, main_file);
 elif lang == "Python":
-	print("Python");
+	prog = Python(data[0], data[2], data[1], data[3], cmplfiles, main_file);
 
 
 cwd = os.getcwd();
-os.chdir("/var/www/html" + prog.getFilePath());
+os.chdir("../" + prog.getFilePath());
+
 compiled = prog.compile();
 if( compiled == "COMPILED" ):
-	prog.execute();
+	analysis = prog.staticAnalysis() + "@#$@@#$@";
+	output = analysis + prog.execute();
+	print(output);
 else:
 	print( compiled );
 os.chdir(cwd);

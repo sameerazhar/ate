@@ -25,7 +25,7 @@
 	}
 	$row = mysql_fetch_assoc($result,MYSQL_ASSOC);
 	
-	$fd = fopen("/var/www/html" . $row["file_path"] . $file, "w") or die("ERROR");
+	$fd = fopen("../../" . $row["file_path"] . $file, "w") or die("ERROR");
 	if( strcasecmp($content, "") == 0 )
 	{
 		fwrite($fd, " ") or die("ERROR");

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ANSI_X3.4-1968"?>
+<pmd-cpd>
+   <duplication lines="4" tokens="19">
+      <file line="8"
+            path="/var/www/html/ate/student/server/../../studentData/sem6/1PI11CS172/11CS357/week_1_1/main.cpp"/>
+      <file line="13"
+            path="/var/www/html/ate/student/server/../../studentData/sem6/1PI11CS172/11CS357/week_1_1/main.cpp"/>
+      <codefragment><![CDATA[	int *x = new int[10];
+	cout << "Hello World" << endl;
+	cout << "Hello World" << endl;
+	cout << "Hello World" << endl;]]></codefragment>
+   </duplication>
+   <duplication lines="3" tokens="13">
+      <file line="8"
+            path="/var/www/html/ate/student/server/../../studentData/sem6/1PI11CS172/11CS357/week_1_1/main.cpp"/>
+      <file line="14"
+            path="/var/www/html/ate/student/server/../../studentData/sem6/1PI11CS172/11CS357/week_1_1/main.cpp"/>
+      <codefragment><![CDATA[	int *x = new int[10];
+	cout << "Hello World" << endl;
+	cout << "Hello World" << endl;]]></codefragment>
+   </duplication>
+</pmd-cpd>

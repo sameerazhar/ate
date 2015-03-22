@@ -101,7 +101,7 @@ function startTimer()
 		document.getElementById( "timer" ).innerHTML = "Sorry, your browser does not support Web worker";
 	}
 }
-setTimeout(startTimer,500);
+startTimer();
 
 function update_quiz()
 {
@@ -134,6 +134,7 @@ function update_quiz_response()
 	}*/
 }
 
-window.onload= function(){
+window.onload= function()
+{
 	t=setInterval(update_quiz,10000);
 }

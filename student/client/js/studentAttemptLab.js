@@ -190,9 +190,9 @@ function get_file_name(file_id)
 			file = file + ".h";
 		}
 	}
-	else if( lang == "C++" )
+	else if( lang == "cpp" )
 	{
-		file = temp.slice(0, temp.length - 3) + ".cpp";
+		file = temp.slice(0, temp.length - 3);
 		if( temp.slice(temp.length - 3, temp.length) == "cpp" )
 		{
 			file = file + ".cpp";
@@ -490,6 +490,7 @@ function execute()
 		return;
 	}
 	xhr_execute = getXmlHttpObject();
+
 	xhr_execute.onreadystatechange = execute_response;
 	xhr_execute.open("GET", "../server/studentExecuteLab.php?course=" + course + "&week=" + week + "&que=" + que + "&lang=" + lang + "&main_file=" + main_file + "&cmplfiles=" + cmplfiles, true);
 	xhr_execute.send();
@@ -521,21 +522,38 @@ function execute_response()
 				}
 				else
 				{
-					heading.style.color = "black";
-					heading.innerHTML = "Output";
-					var output_list = res.split("@#$");
-					var ouput_str = "";
-					for( var i = 1; i < output_list.length; i++ )
+					if( lang == "Python" )
 					{
-						ouput_str += "<b>Test Case " + i + ":</b><br>";
-						var new_line = output_list[i - 1].replace(/\n/g, "<br>");
-						ouput_str += new_line + "<br><br>";
+						var analysis = document.getElementById("analysis");
+						analysis.innerHTML = res.split("@#$@@#$@")[0].replace(/\n/g, "<br>");
 					}
-					output.innerHTML = ouput_str;
+					else
+					{
+						var analysis_error = res.substring(14, res.length);
+						analysis_list = analysis_error.split("@#$@@#$@");
+						if( analysis_list[0] != "" && analysis_list != null)
+						{
+							var analysis = document.getElementById("analysis");
+							analysis.innerHTML = analysis_list[0].replace(/\n/g, "<br>");
+						}
+						res = analysis_list[1];
+						heading.style.color = "black";
+						heading.innerHTML = "Output";
+						var output_list = res.split("@#$");
+						var ouput_str = "";
+						for( var i = 1; i < output_list.length; i++ )
+						{
+							ouput_str += "<b>Test Case " + i + ":</b><br>";
+							var new_line = output_list[i - 1].replace(/\n/g, "<br>");
+							ouput_str += new_line + "<br><br>";
+						}
+						output.innerHTML = ouput_str;
+					}
 				}
 				
-				
+				$("#analysis_window").slideDown("slow");
 				$("#output_window").slideDown("slow");
+
 			}
 		}
 	}
@@ -574,16 +592,10 @@ function repeated_code_response()
 			}
 			else
 			{
-				//var cmd = document.getElementById("cmd");
-				//cmd.innerHTML = xhr_repeated_code.responseText;
-				//alert(xhr_repeated_code.responseText);
-				var win = window.open(xhr_repeated_code.responseText, '_blank');
-				//win.focus();
-				
-				if(win.closed)
-				{
-					alert("Please Disable Pop-up blocker to see the repeated code and try again.");
-				}
+				var fram = document.getElementById("repeated");
+				fram.src = "http://localhost" + xhr_repeated_code.responseText;
+				$("#repeated_code_window").slideDown("slow");
+
 			}
 		}
 		else
@@ -591,4 +603,16 @@ function repeated_code_response()
 			alert("Something went wrong, try later.");
 		}
 	}
+}
+
+function minimize_repeated_div()
+{
+	$("#frame_repeated_div").slideToggle("slow");
+}
+
+function close_repeated_div()
+{
+	var frame = document.getElementById("repeated");
+	frame.src = "";
+	$("#repeated_code_window").slideUp("slow");
 }

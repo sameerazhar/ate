@@ -32,7 +32,6 @@ area.style.display = 'none';
 </style>
 </head>
 <body>
-<h2>Summary of duplicated code</h2>
 This page summarizes the code fragments that have been found to be replicated in the code.
 <p/>
 <table border="1" class="summary" cellpadding="2">
@@ -62,7 +61,7 @@ on the file names.
 <td>
 <table>
 <xsl:for-each select="file">
-<tr><td><a><xsl:attribute name="href">../src/<xsl:value-of select="@path"/>.html#<xsl:value-of select="@line"/></xsl:attribute><xsl:value-of select="@path"/></a></td><td> line <xsl:value-of select="@line"/></td></tr>
+<tr><td style="color:blue;"><xsl:value-of select="@path"/></td><td> line <xsl:value-of select="@line"/></td></tr>
 </xsl:for-each>
 </table>
 </td>
